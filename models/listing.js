@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const review = require('./review');
+const { ref } = require('joi');
 
 const listingSchema = new mongoose.Schema({
     title: {
@@ -15,7 +17,13 @@ const listingSchema = new mongoose.Schema({
     },
     price: Number,
     location: String,
-    country: String
+    country: String,
+    reviews: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Review',
+        },
+    ]
 })
 
 const Listing = mongoose.model('Listing', listingSchema);

@@ -1,0 +1,43 @@
+<% layout("/layouts/boilerplate") %>
+    <div class="row">
+        <div class="col-8 offset-3">
+
+            <body>
+                <h3> <%= listing.title %></h3>
+            </body>
+        </div>
+        <div class="card col-6 offset-3 show-card ">
+            <img src="<%= listing.image %>" class="card-img-top show-img" alt="listing_image">
+            <div class="card-body">
+                <p class="card-text">
+                    <%= listing.description %> <br>
+                        &#8377; <%= listing.price.toLocaleString('en-In') %> <br>
+                            <%= listing.location %> <br>
+                                <%= listing.country %>
+                </p>
+            </div>
+        </div>
+
+        <div class="btns offset-1">
+            <a href="/listings/<%= listing._id %>/edit" class="edit-btn btn btn-dark col-1 offset-2">Edit</a>
+            <form method="post" action="/listings/<%= listing._id %>?_method=delete">
+                <button class="btn btn-dark offset-2">Delete</button>
+            </form>
+        </div>
+    </div>
+    <hr>
+    <div class="col-8 offset-3">
+        <h4>Leave a review : </h4>
+        <form action="/listings/<%= listing._id %>/reviews" method="post" class="needs-validation" novalidate>
+            <div class="mb-3 mt-3">
+                <label for="rating" class="form-label">Rating : </label>
+                <input type="range" min="1" max="5" id="rating" name="review[rating]" class="form-range">
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="comment" class="form-label">Comment : </label>
+                <textarea name="review[comment]" id="comment" cols="20" rows="5" class="form-control" placeholder="Enter comment here..."></textarea>
+                <div class="invalid-feedback"></div>
+            </div>
+            <button class="mb-3 mt-3 btn-outlook-dark">Submit</button>
+        </form>
+    </div>
