@@ -3,10 +3,12 @@
         <div class="col-8 offset-3">
 
             <body>
-                <h3> <%= listing.title %></h3>
+                <h3>
+                    <%= listing.title %>
+                </h3>
             </body>
         </div>
-        <div class="card col-6 offset-3 show-card ">
+        <div class="card listing-card col-6 offset-3 show-card ">
             <img src="<%= listing.image %>" class="card-img-top show-img" alt="listing_image">
             <div class="card-body">
                 <p class="card-text">
@@ -35,9 +37,30 @@
             </div>
             <div class="mb-3 mt-3">
                 <label for="comment" class="form-label">Comment : </label>
-                <textarea name="review[comment]" id="comment" cols="20" rows="5" class="form-control" placeholder="Enter comment here..."></textarea>
-                <div class="invalid-feedback"></div>
+                <textarea name="review[comment]" id="comment" cols="20" rows="5" class="form-control"
+                    placeholder="Enter comment here..." required></textarea>
+                <div class="invalid-feedback">
+                    comment is required.
+                </div>
             </div>
-            <button class="mb-3 mt-3 btn-outlook-dark">Submit</button>
+            <button class="btn mb-3 mt-3 btn-dark">Submit</button>
         </form>
+    </div>
+    <hr>
+    <div class="col-8 offset-3">
+        <h4>All Reviews : </h4>
+        <div class="row">
+            <% for(review of listing.reviews) { %>
+                <div class="card col-5 ms-3 mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">John Snow</h5>
+                        <h6 class="card-text"><%= review.comment %></h6>
+                        <h6 class="card-text"><%= review.rating %></h6>
+                        <form class="mb-3" method="post" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=delete">
+                            <button class="btn btn-sm btn-dark">delete</button>
+                        </form>
+                    </div>
+                </div>
+            <% } %>
+        </div>
     </div>
